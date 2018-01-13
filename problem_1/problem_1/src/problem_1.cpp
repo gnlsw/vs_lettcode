@@ -66,18 +66,20 @@ public:
 	{
 		vector<int> result;
 		map<int, int> nums_map;
+		map<int, int>::iterator it;
 		for(int i = 0; i < nums.size(); i++)
 		{
 			int component = target - nums[i];
-			if(0 == nums_map.count(component))
+			it = nums_map.find(component);
+			if(nums_map.end() == it)
 			{
 				nums_map[nums[i]] = i;
 				continue;
 			}
-
-			if(nums_map[component] != i)
+			
+			if(it->second != i)
 			{
-				result.push_back(nums_map[component]);
+				result.push_back(it->second);
 				result.push_back(i);
 				return result;
 			}
