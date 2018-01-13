@@ -1,2 +1,12 @@
-build
-ipch
+# User-specific file
+*.suo
+*.user
+
+# build result
+Debug/
+
+# visual c++ cache files
+ipch/
+*.ncb
+*.opensdf
+*.sdf
