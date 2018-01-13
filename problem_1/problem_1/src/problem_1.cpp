@@ -1,10 +1,12 @@
 #include <iostream>
 #include <vector>
+#include <map>
 
 
 using std::cout;
 using std::endl;
 using std::vector;
+using std::map;
 
 class SolutionA {
 public:
@@ -28,6 +30,62 @@ public:
 	}
 };
 
+class SolutionB {
+public:
+	vector<int> twoSum(vector<int>& nums, int target)
+	{
+		vector<int> result;
+		map<int, int> nums_map;
+		for(int i = 0; i < nums.size(); i++)
+		{
+			nums_map[nums[i]] = i;
+		}
+		for(int i = 0; i < nums.size(); i++)
+		{
+			int component = target - nums[i];
+			if(0 == nums_map.count(component))
+			{
+				continue;
+			}
+			if(i == nums_map[component])
+			{
+				continue;
+			}
+
+			result.push_back(i);
+			result.push_back(nums_map[component]);
+			break;
+		}
+		return result;
+	}
+};
+
+class SolutionC{
+public:
+	vector<int> twoSum(vector<int>& nums, int target)
+	{
+		vector<int> result;
+		map<int, int> nums_map;
+		for(int i = 0; i < nums.size(); i++)
+		{
+			int component = target - nums[i];
+			if(0 == nums_map.count(component))
+			{
+				nums_map[nums[i]] = i;
+				continue;
+			}
+
+			if(nums_map[component] != i)
+			{
+				result.push_back(nums_map[component]);
+				result.push_back(i);
+				return result;
+			}
+		}
+		return result;
+	}
+};
+
 int main()
 {
 	vector<int> nums;
@@ -38,4 +96,10 @@ int main()
 
 	SolutionA s;
 	vector<int> result = s.twoSum(nums, 13);
+
+	SolutionB sb;
+	vector<int> result_b = sb.twoSum(nums, 13);
+
+	SolutionC sc;
+	vector<int> result_c = sc.twoSum(nums, 13);
 }
