@@ -19,16 +19,8 @@ public:
 		int carry = 0;
         while((NULL != l1) || (NULL != l2))
 		{
-			int left = 0;
-			int right = 0;
-			if(NULL != l1)
-			{
-				left = l1->val;
-			}
-			if(NULL != l2)
-			{
-				right = l2->val;
-			}
+			int left = (l1 != NULL) ? (l1->val) : 0;
+			int right = (l2 != NULL) ? (l2->val) : 0;
 			int val = left + right + carry;
 			ListNode *node = new ListNode(val % 10);
 			tail->next = node;
