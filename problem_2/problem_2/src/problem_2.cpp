@@ -17,15 +17,18 @@ public:
 		ListNode *head = new ListNode(0);
 		ListNode *tail = head;
 		int carry = 0;
+		int left;
+		int right;
+		int sum;
         while((NULL != l1) || (NULL != l2))
 		{
-			int left = (l1 != NULL) ? (l1->val) : 0;
-			int right = (l2 != NULL) ? (l2->val) : 0;
-			int val = left + right + carry;
-			ListNode *node = new ListNode(val % 10);
+			left = (l1 != NULL) ? (l1->val) : 0;
+			right = (l2 != NULL) ? (l2->val) : 0;
+			sum = left + right + carry;
+			ListNode *node = new ListNode(sum % 10);
 			tail->next = node;
 			tail = node;
-			carry = val / 10;
+			carry = sum / 10;
 			if(NULL != l1)
 			{
 				l1 = l1->next;
