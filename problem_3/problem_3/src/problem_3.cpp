@@ -46,11 +46,50 @@ public:
 	}
 };
 
+class SolutionB {
+public:
+	int lengthOfLongestSubstring(string s)
+	{
+		if(s.size() <= 1)
+		{
+			return s.size();
+		}
+
+		int max_length = 0;
+		for(string::size_type start_index = 0; start_index < s.size(); start_index++)
+		{
+			int length = 1;
+			for(string::size_type curr_index = start_index + 1; curr_index < s.size(); curr_index++)
+			{
+				/* 查看从start_index到当前的字符，是否存在相同的，
+				 * 如果无，长度加1，计算下一个字符
+				 * 如果有，start_index变化
+				 */
+				int pos = s.find(s[curr_index], start_index);
+				if(pos >= curr_index)
+				{
+					length++;
+				}
+				else
+				{
+					break;
+				}
+			}
+			max_length = (length > max_length) ? length : max_length;
+		}
+
+		return max_length;
+	}
+};
+
 int main()
 {
 	string s = "au";
 	int max_length = 0;
 	SolutionA sa;
 	max_length = sa.lengthOfLongestSubstring(s);
+
+	SolutionB sb;
+	max_length = sb.lengthOfLongestSubstring(s);
 	return 0;
 }
